@@ -1,0 +1,50 @@
+nav{
+    background-color: #333;
+    height: 30px;
+    display: flex;
+
+}
+
+header{
+    background-color: rgb(210, 210, 210);
+    height: 100px;
+
+}
+
+footer{
+    background-color: rgb(210, 210, 210);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+
+
+
+
+}
+
+article{
+    background-color: rgb(204, 204, 216);
+    height: 300px;
+    width: 500px;
+    margin: auto;
+    margin-top: 50px;
+
+}
+
+div{
+    background-color: rgb(204, 204, 216);
+    height: 500px;
+    width: 500px;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 200px;
+
+
+}
+
+
+
+
+

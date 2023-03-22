@@ -26,7 +26,7 @@ let latestNews = function (){
         let newsPost = data[latest].content.rendered;
         //console.log(newsPost);
         let newsArticle = document.createElement("p");
-        newsArticle.innerText = newsPost;
+        newsArticle.innerHTML= newsPost;
         let sec = document.querySelector("section");
         sec.appendChild(newsArticle);
         newsButtonAll();
@@ -59,7 +59,7 @@ let allNews = function () {
         let newsPost = data[i].content.rendered;
         //console.log(newsPost);
         let newsArticle = document.createElement("p");
-        newsArticle.innerText = newsPost;
+        newsArticle.innerHTML = newsPost;
         let sec = document.querySelector("section");
         sec.appendChild(newsArticle);
         i++;

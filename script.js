@@ -1,3 +1,4 @@
+//Importerar nyhetsfunktionerna för applikationen.
 import './news.js';
 
 const nav = document.createElement("nav");

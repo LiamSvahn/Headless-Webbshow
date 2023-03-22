@@ -1,3 +1,8 @@
+body{
+    margin: 0;
+}
+
+
 nav{
     background-color: #333;
     height: 30px;
@@ -8,6 +13,7 @@ nav{
 header{
     background-color: rgb(210, 210, 210);
     height: 100px;
+    background-image: url("http://46.101.108.242/wp-content/uploads/2023/03/Screenshot-2023-03-09-102222-1024x267-1.png")
 
 }
 

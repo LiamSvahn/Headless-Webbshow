@@ -1,4 +1,5 @@
 import './news.js';
+import './orderFunction.js';
 
 const nav = document.createElement("nav");
 const header = document.createElement("header");

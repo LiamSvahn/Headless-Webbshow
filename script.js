@@ -1,3 +1,5 @@
+import './news.js';
+
 const nav = document.createElement("nav");
 const header = document.createElement("header");
 const footer = document.createElement("footer");

@@ -1,14 +1,19 @@
+body{
+    margin: 0;
+}
+p{
+    margin: 0;
+}
 nav{
     background-color: #333;
     height: 30px;
     display: flex;
-
 }
 
 header{
     background-color: rgb(210, 210, 210);
     height: 100px;
-
+    text-align: center;
 }
 
 footer{
@@ -18,10 +23,6 @@ footer{
     left: 0;
     right: 0;
     height: 100px;
-
-
-
-
 }
 
 article{
@@ -30,19 +31,40 @@ article{
     width: 500px;
     margin: auto;
     margin-top: 50px;
-
 }
 
 div{
     background-color: rgb(204, 204, 216);
-    height: 500px;
-    width: 500px;
+    width: 900px;
     margin: auto;
     margin-top: 50px;
     margin-bottom: 200px;
-
+}
+section{
+    display: flex;
+    flex-wrap: wrap;
 
 }
+section>div{
+    height: 450px;
+    width: 350px;
+    background-color: #333;
+    margin: 40px;
+    display: grid;
+    
+}
+section>div>img{
+    width: 350px;
+    height: 200px;
+}
+section>div>h2{
+    margin: 20px 10px 20px 10px;
+}
+section>div>p{
+    margin: 0px 10px 0px 10px;
+    width: fit-content;
+}
+
 
 
 

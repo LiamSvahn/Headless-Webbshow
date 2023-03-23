@@ -210,6 +210,7 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
     console.log(data)
 });
 
+HEAD
 function postOrder() {
     console.log("Skicka order");
 
@@ -266,4 +267,11 @@ function postOrder() {
 
 };
 
+
+
+let button = document.createElement("button");
+
+document.body.append(nav, header, footer, article, div,);
+button.innerText = "add to cart";
+div.append(button);
 

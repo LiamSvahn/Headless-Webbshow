@@ -270,8 +270,25 @@ function postOrder() {
 
 
 let button = document.createElement("button");
+button.classList.add("btn");
 
-document.body.append(nav, header, footer, article, div,);
+document.body.append(nav, header, footer, article, div);
 button.innerText = "add to cart";
 div.append(button);
 
+fetch("http://46.101.108.242/wp-json/wc/v3/products")
+  .then((res) => res.json())
+  .then((data) => {
+    console.log("data", data);
+    getItem(data);
+  });
+
+function getItem(items) {
+  items.map((mapdata) => {
+    console.log(mapdata.id);
+    const button = document.createElement("button");
+    button.setAttribute("value", mapdata.id);
+    button.innerText = mapdata.price;
+    article.append(button);
+  });
+}

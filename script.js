@@ -63,6 +63,7 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
         ul.appendChild(li)
     })
     div.appendChild(ul)
+}
 button.classList.add("btn");
 
 document.body.append(nav, header, footer, article, div);

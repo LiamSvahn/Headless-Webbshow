@@ -37,12 +37,10 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
     ProduktData.map(product =>{
         let i = 0;
         let li = document.createElement("div")
-
         
         let productImg = document.createElement("img")
         productImg.src = product.images[i].src
         
-        const button = document.createElement("button");
         let productName = document.createElement("h2")
         let productBeskrivning = document.createElement("p")
         let productPris = document.createElement("p")

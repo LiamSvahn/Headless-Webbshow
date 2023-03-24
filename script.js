@@ -1,3 +1,6 @@
+//import './news.js';
+//import './orderFunction.js';
+
 const nav = document.createElement("nav");
 const header = document.createElement("header");
 const footer = document.createElement("footer");
@@ -27,6 +30,8 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
     console.log()
     Produckterna(data)
 })
+
+
  function Produckterna(ProduktData){
     let ul = document.createElement("section")
     ProduktData.map(product =>{
@@ -39,11 +44,14 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
         let productName = document.createElement("h2")
         let productBeskrivning = document.createElement("p")
         let productPris = document.createElement("p")
+        let productAmount = document.createElement("input")
+        productAmount.setAttribute("type", "number");
+        productAmount.setAttribute("min", "1")
         productName.innerText = product.name;
         productBeskrivning.innerHTML = product.description;
         productPris.innerText = product.price;
         
-        li.append(productImg, productName, productBeskrivning, productPris)
+        li.append(productImg, productName, productBeskrivning, productPris, productAmount)
         
         
         i++;

@@ -48,11 +48,11 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
         const button = document.createElement("button");
         productAmount.setAttribute("type", "number");
         productAmount.setAttribute("min", "1")
-        button.setAttribute("value", mapdata.id);
+        button.setAttribute("value", product.id);
         productName.innerText = product.name;
         productBeskrivning.innerHTML = product.description;
         productPris.innerText = product.price;
-        button.innerText = mapdata.price;
+        button.innerText = product.price;
         
         li.append(productImg, productName, productBeskrivning, productPris, productAmount, button)
         
@@ -67,25 +67,3 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
     })
     div.appendChild(ul)
 }
-button.classList.add("btn");
-
-document.body.append(nav, header, footer, article, div);
-button.innerText = "add to cart";
-div.append(button);
-
-//fetch("http://46.101.108.242/wp-json/wc/v3/products")
-//  .then((res) => res.json())
-//  .then((data) => {
-//    console.log("data", data);
-//    getItem(data);
-//  });
-//
-//function getItem(items) {
-//  items.map((mapdata) => {
-//    console.log(mapdata.id);
-//    const button = document.createElement("button");
-//    button.setAttribute("value", mapdata.id);
-//    button.innerText = mapdata.price;
-//    article.append(button);
-//  });
-//}

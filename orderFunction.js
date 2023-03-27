@@ -1,3 +1,4 @@
+
 fetch("http://46.101.108.242/wp-json/wc/v3/products/")
 .then(res => res.json())
 .then(data => {
@@ -5,7 +6,7 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
 });
 
 
-function postOrder() {
+export default function postOrder() {
     console.log("Skicka order");
 
     let order = {

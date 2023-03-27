@@ -1,5 +1,6 @@
 import './news.js';
-import './orderFunction.js';
+import postOrder from './orderFunction.js'
+
 
 const nav = document.createElement("nav");
 const header = document.createElement("header");
@@ -7,8 +8,10 @@ const footer = document.createElement("footer");
 const article = document.createElement("article");
 const div = document.createElement("div");
 const p = document.createElement("p");
+const c = document.createElement("div");
 
-document.body.append(nav, header, footer, article, div);
+
+document.body.append(nav, header, footer, article, div,);
 
 fetch("http://46.101.108.242/wp-json/wp/v2/pages/")
 .then(res => res.json())
@@ -46,13 +49,22 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
         productBeskrivning.innerHTML = product.description;
         productPris.innerText = product.price;
         
+        
         li.append(productImg, productName, productBeskrivning, productPris)
         
         
         i++;
         li.addEventListener("click", () =>{
             console.log("click", product.id)
-            
+            let cart = JSON.parse(localStorage.getItem("cart"))
+            console.log("cart från LS", cart);
+
+            // ÄNDRA
+            cart.push(product.id);
+
+            // SPARA
+            localStorage.setItem("cart", JSON.stringify(cart))
+            printCart();
             
         })
         ul.appendChild(li)
@@ -60,3 +72,56 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
     div.appendChild(ul)
 
 }
+
+if (localStorage.getItem("cart")) {
+    console.log("Finns en kundvagn");
+    printCart();
+} else {
+    console.log("Skapar tom kundvagn");
+    let cart = [];
+    localStorage.setItem("cart", JSON.stringify(cart));
+    printCart();
+}
+//function clearCartSpace(){
+    //document.getElementById(cart).innerHTML = "";
+//};
+
+function printCart() {
+    
+    if(JSON.parse(localStorage.getItem("cart")).length > 0) {
+        console.log("Finns produkter");
+        //clearCartSpace();
+        let emptyCartBtn = document.createElement("button");
+        emptyCartBtn.innerText = "Töm kundvagnen";
+
+        emptyCartBtn.addEventListener("click", () => {
+            localStorage.setItem("cart", JSON.stringify([]));
+            printCart();
+        })
+
+        let sendOrderBtn = document.createElement("button");
+        sendOrderBtn.innerText = "Skicka order";
+
+        sendOrderBtn.addEventListener("click", postOrder)
+
+        cart.append(emptyCartBtn, sendOrderBtn);
+
+    } else {
+        console.log("Tom kundvagn");
+        cart.innerText = "Inga produkter"
+    }
+}
+
+
+
+
+
+fetch("http://46.101.108.242/wp-json/wc/v3/products/")
+.then(res => res.json())
+.then(data => {
+    console.log(data)
+});
+
+
+
+

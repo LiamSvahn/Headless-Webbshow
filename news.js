@@ -3,14 +3,14 @@ const newsApi = "http://46.101.108.242/wp-json/wp/v2/posts";
 let newsButtonAll = function(){
     let nButton = document.createElement("button");
     nButton.innerText = "Mer Nyheter";
-    let sec = document.querySelector("section");
+    let sec = document.querySelector("article");
     sec.appendChild(nButton);
     nButton.addEventListener('click', newsButtonClick);
 }
 let newsButtonOne = function(){
     let nButtonOne = document.createElement("button");
     nButtonOne.innerText = "Mindre Nyheter";
-    let sec = document.querySelector("section");
+    let sec = document.querySelector("article");
     sec.appendChild(nButtonOne);
     nButtonOne.addEventListener('click', newsButtonOneClick);
 }
@@ -27,7 +27,7 @@ let latestNews = function (){
         //console.log(newsPost);
         let newsArticle = document.createElement("p");
         newsArticle.innerHTML= newsPost;
-        let sec = document.querySelector("section");
+        let sec = document.querySelector("article");
         sec.appendChild(newsArticle);
         newsButtonAll();
         
@@ -36,12 +36,12 @@ let latestNews = function (){
 // Funktioner som ger nyhetsknapparna deras funktioner...
 latestNews();
 let newsButtonClick = function(){
-    let sec = document.querySelector("section");
+    let sec = document.querySelector("article");
     sec.innerHTML = "";
     allNews();
 };
 let newsButtonOneClick= function(){
-    let sec = document.querySelector("section");
+    let sec = document.querySelector("article");
     sec.innerHTML = "";
     latestNews();
 };
@@ -60,7 +60,7 @@ let allNews = function () {
         //console.log(newsPost);
         let newsArticle = document.createElement("p");
         newsArticle.innerHTML = newsPost;
-        let sec = document.querySelector("section");
+        let sec = document.querySelector("article");
         sec.appendChild(newsArticle);
         i++;
     } while (i < data.length);

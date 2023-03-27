@@ -61,7 +61,7 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
         
         
         i++;
-        li.addEventListener("click", () =>{
+        button.addEventListener("click", () =>{
             console.log("click", product.id)
             let cart = JSON.parse(localStorage.getItem("cart"))
             console.log("cart från LS", cart);
@@ -128,7 +128,3 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
 .then(data => {
     console.log(data)
 });
-
-
-
-

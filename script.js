@@ -99,6 +99,7 @@ function printCart() {
         console.log("Finns produkter");
         //clearCartSpace();
         let emptyCartBtn = document.createElement("button");
+        emptyCartBtn.setAttribute("class", "Knapp")
         emptyCartBtn.innerText = "Töm kundvagnen";
 
         emptyCartBtn.addEventListener("click", () => {
@@ -107,10 +108,13 @@ function printCart() {
         })
 
         let sendOrderBtn = document.createElement("button");
+        sendOrderBtn.setAttribute("class", "Knapp")
         sendOrderBtn.innerText = "Skicka order";
+
 
         sendOrderBtn.addEventListener("click", postOrder)
 
+        document.querySelectorAll('.Knapp').forEach(button => button.remove())
         cart.append(emptyCartBtn, sendOrderBtn);
 
     } else {

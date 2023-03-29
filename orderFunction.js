@@ -1,14 +1,15 @@
-
+import './script.js';
+//import emptyCart from './script.js'
 fetch("http://46.101.108.242/wp-json/wc/v3/products/")
 .then(res => res.json())
 .then(data => {
     console.log(data)
 });
 
+let cart1 = JSON.parse(localStorage.getItem("cart1"));
 
 export default function postOrder() {
     console.log("Skicka order");
-    let line_items = cart1;
 
     let order = {
         payment_method: "bacs", 
@@ -35,16 +36,9 @@ export default function postOrder() {
             email: "bakagodakakor@live.se",
             phone: "070123456"
         },
-        line_items: [
-            {
-                product_id: 215,
-                quantity: 1
-            }, 
-            {
-                product_id: 162,
-                quantity: 2
-            }
-        ],
+        line_items: 
+        cart1
+        ,
         shipping_lines: [
             {
                 method_id: "flat_rate",
@@ -63,8 +57,9 @@ export default function postOrder() {
     })
     .then(res => res.json())
     .then(data => {
-        console.log("Order skickad", data);
+        console.log("Order skickad", data)
+        //emptyCart();
     })
     .catch(err => console.log("err", err));
-};
 
+};

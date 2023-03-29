@@ -1,5 +1,6 @@
 import './news.js';
-import './price.js';
+import postOrder from './orderFunction.js'
+
 
 const nav = document.createElement("nav");
 const header = document.createElement("header");
@@ -7,7 +8,7 @@ const footer = document.createElement("footer");
 const article = document.createElement("article");
 const div = document.createElement("div");
 const p = document.createElement("p");
-const cart1 = [];
+const c = document.createElement("div");
 
 
 document.body.append(nav, header, footer, article, div,);
@@ -33,6 +34,7 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
     Produckterna(data)
 })
 
+let cart1 = JSON.parse(localStorage.getItem("cart1"));
 
  function Produckterna(ProduktData){
     let ul = document.createElement("section")
@@ -66,7 +68,7 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
             console.log("cart från LS", cart1);
 
             // ÄNDRA
-            cart1.push(product.id);
+            cart1.push({product_id: product.id, quantity: 1});
 
             // SPARA
             localStorage.setItem("cart1", JSON.stringify(cart1))
@@ -91,9 +93,12 @@ if (localStorage.getItem("cart1")) {
 //function clearCartSpace(){
     //document.getElementById(cart).innerHTML = "";
 //};
+let emptyCart = function() {
+    localStorage.setItem("cart1", JSON.stringify([]));
+            printCart();
+};
 
 function printCart() {
-    
     if(JSON.parse(localStorage.getItem("cart1")).length > 0) {
         console.log("Finns produkter");
         //clearCartSpace();
@@ -102,8 +107,10 @@ function printCart() {
         emptyCartBtn.innerText = "Töm kundvagnen";
 
         emptyCartBtn.addEventListener("click", () => {
-            localStorage.setItem("cart1", JSON.stringify([]));
-            printCart();
+            emptyCart();
+            //localStorage.setItem("cart1", JSON.stringify([]));
+            //printCart();
+            
         })
 
         let sendOrderBtn = document.createElement("button");
@@ -126,12 +133,12 @@ function printCart() {
 
 
 
-
 fetch("http://46.101.108.242/wp-json/wc/v3/products/")
 .then(res => res.json())
 .then(data => {
     console.log(data)
 });
+
 
 
 

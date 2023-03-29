@@ -290,5 +290,8 @@ function getItem(items) {
     button.setAttribute("value", mapdata.id);
     button.innerText = mapdata.price;
     article.append(button);
-  });
+    
+  })
 }
+
+

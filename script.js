@@ -8,7 +8,7 @@ const footer = document.createElement("footer");
 const article = document.createElement("article");
 const div = document.createElement("div");
 const p = document.createElement("p");
-const c = document.createElement("div");
+const cart1 = [];
 
 
 document.body.append(nav, header, footer, article, div,);
@@ -63,14 +63,14 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
         i++;
         button.addEventListener("click", () =>{
             console.log("click", product.id)
-            let cart = JSON.parse(localStorage.getItem("cart"))
-            console.log("cart från LS", cart);
+            let cart1 = JSON.parse(localStorage.getItem("cart1"))
+            console.log("cart från LS", cart1);
 
             // ÄNDRA
-            cart.push(product.id);
+            cart1.push(product.id);
 
             // SPARA
-            localStorage.setItem("cart", JSON.stringify(cart))
+            localStorage.setItem("cart1", JSON.stringify(cart1))
             printCart();
             
         })
@@ -80,13 +80,13 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
 
 }
 
-if (localStorage.getItem("cart")) {
+if (localStorage.getItem("cart1")) {
     console.log("Finns en kundvagn");
     printCart();
 } else {
     console.log("Skapar tom kundvagn");
-    let cart = [];
-    localStorage.setItem("cart", JSON.stringify(cart));
+    let cart1 = [];
+    localStorage.setItem("cart1", JSON.stringify(cart1));
     printCart();
 }
 //function clearCartSpace(){
@@ -95,7 +95,7 @@ if (localStorage.getItem("cart")) {
 
 function printCart() {
     
-    if(JSON.parse(localStorage.getItem("cart")).length > 0) {
+    if(JSON.parse(localStorage.getItem("cart1")).length > 0) {
         console.log("Finns produkter");
         //clearCartSpace();
         let emptyCartBtn = document.createElement("button");
@@ -103,7 +103,7 @@ function printCart() {
         emptyCartBtn.innerText = "Töm kundvagnen";
 
         emptyCartBtn.addEventListener("click", () => {
-            localStorage.setItem("cart", JSON.stringify([]));
+            localStorage.setItem("cart1", JSON.stringify([]));
             printCart();
         })
 
@@ -127,8 +127,12 @@ function printCart() {
 
 
 
+
 fetch("http://46.101.108.242/wp-json/wc/v3/products/")
 .then(res => res.json())
 .then(data => {
     console.log(data)
 });
+
+
+

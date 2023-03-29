@@ -8,6 +8,7 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
 
 export default function postOrder() {
     console.log("Skicka order");
+    let line_items = cart1;
 
     let order = {
         payment_method: "bacs", 

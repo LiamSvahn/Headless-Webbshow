@@ -1,6 +1,5 @@
 import './news.js';
-import postOrder from './orderFunction.js'
-
+import './price.js';
 
 const nav = document.createElement("nav");
 const header = document.createElement("header");

@@ -50,7 +50,21 @@ section{
 
 }
 
+.navbar {
+    background-color: #ebe35a;
+    overflow: hidden;
+  }
 
-
+  .navbar button {
+    float: left;
+    display: block;
+    color: rgb(234, 116, 116);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
 
 

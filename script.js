@@ -1,5 +1,6 @@
 //Importerar nyhetsfunktionerna för applikationen.
 import './news.js';
+import './price.js';
 
 const nav = document.createElement("nav");
 const header = document.createElement("header");

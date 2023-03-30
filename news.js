@@ -15,7 +15,7 @@ let newsButtonOne = function(){
     nButtonOne.addEventListener('click', newsButtonOneClick);
 }
 
-// Funktion som tar fram bara den senaste funktionen....
+// Funktion som tar fram bara den senaste nyheten....
 let latestNews = function (){
     fetch(newsApi) 
     .then(res => res.json())

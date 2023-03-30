@@ -1,5 +1,5 @@
 import './news.js';
-
+import './price.js';
 
 const nav = document.createElement("nav");
 const header = document.createElement("header");
@@ -19,6 +19,81 @@ fetch("http://46.101.108.242/wp-json/wp/v2/pages/")
     StartLägtillText(data[8].excerpt.rendered)
 })
 
+const newsApi = "http://46.101.108.242/wp-json/wp/v2/posts";
+// Skapar två knappar med respektive lyssnare som kallar på knapparnas funktioner.....
+let newsButtonAll = function(){
+    let nButton = document.createElement("button");
+    nButton.innerText = "Mer Nyheter";
+    let sec = document.querySelector("article");
+    sec.appendChild(nButton);
+    nButton.addEventListener('click', newsButtonClick);
+}
+let newsButtonOne = function(){
+    let nButtonOne = document.createElement("button");
+    nButtonOne.innerText = "Mindre Nyheter";
+    let sec = document.querySelector("article");
+    sec.appendChild(nButtonOne);
+    nButtonOne.addEventListener('click', newsButtonOneClick);
+}
+
+// Funktion som tar fram bara den senaste nyheten....
+let latestNews = function (){
+    fetch(newsApi) 
+    .then(res => res.json())
+    .then(data => {
+        console.log("posts", data);
+        let latest = data.length-1;
+        //console.log(data[latest].content);
+        let newsPost = data[latest].content.rendered;
+        //console.log(newsPost);
+        let newsArticle = document.createElement("p");
+        newsArticle.innerHTML= newsPost;
+        let sec = document.querySelector("article");
+        sec.appendChild(newsArticle);
+        newsButtonAll();
+        
+    })
+}
+// Funktioner som ger nyhetsknapparna deras funktioner...
+latestNews();
+let newsButtonClick = function(){
+    let sec = document.querySelector("article");
+    sec.innerHTML = "";
+    allNews();
+};
+let newsButtonOneClick= function(){
+    let sec = document.querySelector("article");
+    sec.innerHTML = "";
+    latestNews();
+};
+
+//Lägger upp alla nyheter från flödet...
+let allNews = function () {
+    fetch(newsApi) 
+    .then(res => res.json())
+    .then(data => {
+        console.log("posts", data);
+        //console.log("posts", data[0].excerpt);
+        //printPages(data);
+        let i = 0;
+    do {
+        let newsPost = data[i].content.rendered;
+        //console.log(newsPost);
+        let newsArticle = document.createElement("p");
+        newsArticle.innerHTML = newsPost;
+        let sec = document.querySelector("article");
+        sec.appendChild(newsArticle);
+        i++;
+    } while (i < data.length);
+    })
+    //Lägger till en knapp som tar tillbaka bara den senaste nyheten
+    newsButtonOne();
+    };
+
+    //allNews();
+
+
+
 function StartLägtillText(text){
     header.append(p)
     document.getElementsByTagName("p")[0].innerHTML = text
@@ -33,6 +108,7 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
     Produckterna(data)
 })
 
+let cart1 = JSON.parse(localStorage.getItem("cart1"));
 
  function Produckterna(ProduktData){
     let ul = document.createElement("section")
@@ -62,14 +138,14 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
         i++;
         button.addEventListener("click", () =>{
             console.log("click", product.id)
-            let cart = JSON.parse(localStorage.getItem("cart"))
-            console.log("cart från LS", cart);
+            let cart1 = JSON.parse(localStorage.getItem("cart1"))
+            console.log("cart från LS", cart1);
 
             // ÄNDRA
-            cart.push(product.id);
+            cart1.push({product_id: product.id, quantity: 1});
 
             // SPARA
-            localStorage.setItem("cart", JSON.stringify(cart))
+            localStorage.setItem("cart1", JSON.stringify(cart1))
             printCart();
             
         })
@@ -79,22 +155,25 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
 
 }
 
-if (localStorage.getItem("cart")) {
+if (localStorage.getItem("cart1")) {
     console.log("Finns en kundvagn");
     printCart();
 } else {
     console.log("Skapar tom kundvagn");
-    let cart = [];
-    localStorage.setItem("cart", JSON.stringify(cart));
+    let cart1 = [];
+    localStorage.setItem("cart1", JSON.stringify(cart1));
     printCart();
 }
 //function clearCartSpace(){
     //document.getElementById(cart).innerHTML = "";
 //};
+let emptyCart = function() {
+    localStorage.setItem("cart1", JSON.stringify([]));
+            printCart();
+};
 
 function printCart() {
-    
-    if(JSON.parse(localStorage.getItem("cart")).length > 0) {
+    if(JSON.parse(localStorage.getItem("cart1")).length > 0) {
         console.log("Finns produkter");
         //clearCartSpace();
         let emptyCartBtn = document.createElement("button");
@@ -102,8 +181,10 @@ function printCart() {
         emptyCartBtn.innerText = "Töm kundvagnen";
 
         emptyCartBtn.addEventListener("click", () => {
-            localStorage.setItem("cart", JSON.stringify([]));
-            printCart();
+            emptyCart();
+            //localStorage.setItem("cart1", JSON.stringify([]));
+            //printCart();
+            
         })
 
         let sendOrderBtn = document.createElement("button");
@@ -123,11 +204,66 @@ function printCart() {
 }
 
 
-
-
-
 fetch("http://46.101.108.242/wp-json/wc/v3/products/")
 .then(res => res.json())
 .then(data => {
     console.log(data)
 });
+
+function postOrder() {
+    console.log("Skicka order");
+
+    let order = {
+        payment_method: "bacs", 
+        payment_method_title: "Direct Bank Transfer",
+        set_paid: true,
+        customer_id: 1,
+        billing: {
+            first_name: "Elias",
+            last_name: "Linderos",
+            adress_1: "Bögat 69",
+            city: "Köping",
+            postcode: "420 69",
+            country: "SE",
+            email: "bakagodakakor@live.se",
+            phone: "070123456"
+        },
+        shipping: {
+            first_name: "Elias",
+            last_name: "Linderos",
+            adress_1: "Bögat 69",
+            city: "Köping",
+            postcode: "420 69",
+            country: "SE",
+            email: "bakagodakakor@live.se",
+            phone: "070123456"
+        },
+        line_items: 
+        cart1
+        ,
+        shipping_lines: [
+            {
+                method_id: "flat_rate",
+                method_title: "Flat rate",
+                total: "100"
+            }    
+        ]
+    
+    }
+    fetch("http://46.101.108.242/wp-json/wc/v3/orders", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify(order),
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Order skickad", data)
+    //.then(emptyCart)
+    })
+    .catch(err => console.log("err", err));
+
+};
+
+

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+
+=======
+>>>>>>> e5e0183 (ändrad)
 //import './news.js';
 //import './price.js';
 
@@ -177,12 +181,12 @@ let cart1 = JSON.parse(localStorage.getItem("cart1"));
         
         i++;
         button.addEventListener("click", () =>{
-            console.log("click", product.id)
+            console.log("click", product.id, productAmount.valueAsNumber)
             let cart1 = JSON.parse(localStorage.getItem("cart1"))
             console.log("cart från LS", cart1);
 
             // ÄNDRA
-            cart1.push({product_id: product.id, quantity: 1});
+            cart1.push({product_id: product.id, quantity: productAmount.valueAsNumber});
 
             // SPARA
             localStorage.setItem("cart1", JSON.stringify(cart1))
@@ -279,7 +283,7 @@ function postOrder() {
             phone: "070123456"
         },
         line_items: 
-        cart1
+        JSON.parse(localStorage.getItem("cart1"))
         ,
         shipping_lines: [
             {
@@ -306,6 +310,7 @@ function postOrder() {
 
 };
 
+<<<<<<< HEAD
 let buttonchild = document.querySelectorAll('button')[0]
 buttonchild.addEventListener("click", (event) =>{
     if(div.style.display = "block"){
@@ -314,3 +319,35 @@ buttonchild.addEventListener("click", (event) =>{
         div.style.display = "block";
     }
 })
+=======
+
+
+let button = document.createElement("button");
+button.classList.add("btn");
+
+document.body.append(nav, header, footer, article, div);
+button.innerText = "add to cart";
+div.append(button);
+
+fetch("http://46.101.108.242/wp-json/wc/v3/products")
+  .then((res) => res.json())
+  .then((data) => {
+    console.log("data", data);
+    getItem(data);
+  });
+
+function getItem(items) {
+  items.map((mapdata) => {
+    console.log(mapdata.id);
+    const button = document.createElement("button");
+    button.setAttribute("value", mapdata.id);
+    button.innerText = mapdata.price;
+    article.append(button);
+    
+  })
+}
+
+function removeBlock(){
+  
+}
+>>>>>>> e5e0183 (ändrad)

@@ -1,5 +1,6 @@
-import './news.js';
-import './price.js';
+
+//import './news.js';
+//import './price.js';
 
 const nav = document.createElement("nav");
 const header = document.createElement("header");
@@ -23,6 +24,7 @@ const newsApi = "http://46.101.108.242/wp-json/wp/v2/posts";
 // Skapar två knappar med respektive lyssnare som kallar på knapparnas funktioner.....
 let newsButtonAll = function(){
     let nButton = document.createElement("button");
+    nButton.setAttribute("id", "nyheterKnapp")
     nButton.innerText = "Mer Nyheter";
     let sec = document.querySelector("article");
     sec.appendChild(nButton);
@@ -54,18 +56,57 @@ let latestNews = function (){
         
     })
 }
-// Funktioner som ger nyhetsknapparna deras funktioner...
-latestNews();
-let newsButtonClick = function(){
-    let sec = document.querySelector("article");
-    sec.innerHTML = "";
-    allNews();
-};
-let newsButtonOneClick= function(){
-    let sec = document.querySelector("article");
-    sec.innerHTML = "";
-    latestNews();
-};
+let newsButtonClick = function() {
+    let sec = document.querySelector("section");
+    
+    // Get all the content inside the article tag
+    const allContent = sec.innerHTML;
+  
+    // Get the "mer nyheter" and "mindre nyheter" buttons
+    const moreBtn = document.querySelector("#moreBtn");
+    const lessBtn = document.querySelector("#lessBtn");
+  
+    // Check if the content is already hidden or not
+    if (sec.classList.contains("hidden")) {
+      // If content is already hidden, show it
+      sec.innerHTML = allContent;
+      sec.classList.remove("hidden");
+      moreBtn.style.display = "none";
+      lessBtn.style.display = "block";
+    } else {
+      // If content is not hidden, hide it
+      sec.innerHTML = allContent.substring(0, 200); // Show only first 200 characters
+      sec.classList.add("hidden");
+      moreBtn.style.display = "block";
+      lessBtn.style.display = "none";
+    }
+  };
+  
+  //// Add click event listeners to the "mer nyheter" and "mindre nyheter" buttons
+  //const moreBtn = document.querySelector("#moreBtn");
+  //moreBtn.addEventListener("click", newsButtonClick);
+  //
+  //const lessBtn = document.querySelector("#lessBtn");
+  //lessBtn.addEventListener("click", newsButtonClick);
+  //
+  //// Hide the "mindre nyheter" button initially
+  //lessBtn.style.display = "none";
+  
+
+// Add click event listeners to the "mer nyheter" and "mindre nyheter" buttons
+// const moreBtn = document.querySelector("#moreBtn");
+//moreBtn.addEventListener("click", newsButtonClick);
+
+//const lessBtn = document.querySelector("#lessBtn");
+//lessBtn.addEventListener("click", newsButtonClick);
+
+// Hide the "mindre nyheter" button initially
+//lessBtn.style.display = "none";
+
+//let newsButtonOneClick= function(){
+  //  let sec = document.querySelector("article");
+    //sec.innerHTML = "";
+    //latestNews();
 
 //Lägger upp alla nyheter från flödet...
 let allNews = function () {
@@ -192,8 +233,7 @@ function printCart() {
         sendOrderBtn.innerText = "Skicka order";
 
 
-        sendOrderBtn.addEventListener("click",postOrder)
-        
+        sendOrderBtn.addEventListener("click", postOrder)
 
         document.querySelectorAll('.Knapp').forEach(button => button.remove())
         cart.append(emptyCartBtn, sendOrderBtn);
@@ -205,26 +245,14 @@ function printCart() {
 }
 
 
-
 fetch("http://46.101.108.242/wp-json/wc/v3/products/")
 .then(res => res.json())
 .then(data => {
     console.log(data)
 });
 
-
-
-
- function postOrder() {
+function postOrder() {
     console.log("Skicka order");
-
-    // items = []
-    // cart = localStorage.getItem("cart1");
-    // cart.map(item => {
-    //     new i = {
-    //         product_id: item.product_id
-    //     }
-    // })
 
     let order = {
         payment_method: "bacs", 
@@ -252,7 +280,7 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
             phone: "070123456"
         },
         line_items: 
-       JSON.parse(localStorage.getItem("cart1"))
+        JSON.parse(localStorage.getItem("cart1"))
         ,
         shipping_lines: [
             {
@@ -273,35 +301,17 @@ fetch("http://46.101.108.242/wp-json/wc/v3/products/")
     .then(res => res.json())
     .then(data => {
         console.log("Order skickad", data)
-   
+    //.then(emptyCart)
     })
     .catch(err => console.log("err", err));
 
 };
 
-
-
-let button = document.createElement("button");
-button.classList.add("btn");
-
-document.body.append(nav, header, footer, article, div);
-button.innerText = "add to cart";
-div.append(button);
-
-fetch("http://46.101.108.242/wp-json/wc/v3/products")
-  .then((res) => res.json())
-  .then((data) => {
-    console.log("data", data);
-    getItem(data);
-  });
-
-function getItem(items) {
-  items.map((mapdata) => {
-    console.log(mapdata.id);
-    const button = document.createElement("button");
-    button.setAttribute("value", mapdata.id);
-    button.innerText = mapdata.price;
-    article.append(button);
-    
-  })
-}
+let buttonchild = document.querySelectorAll('button')[0]
+buttonchild.addEventListener("click", (event) =>{
+    if(div.style.display = "block"){
+        div.style.display = "none";
+    }else{
+        div.style.display = "block";
+    }
+})

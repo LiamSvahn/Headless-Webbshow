@@ -1,6 +1,3 @@
-import './news.js';
-import postOrder from './orderFunction.js'
-
 
 const nav = document.createElement("nav");
 const header = document.createElement("header");
@@ -19,6 +16,81 @@ fetch("http://46.101.108.242/wp-json/wp/v2/pages/")
     console.log("Data", data[8].excerpt.rendered)
     StartLägtillText(data[8].excerpt.rendered)
 })
+
+const newsApi = "http://46.101.108.242/wp-json/wp/v2/posts";
+// Skapar två knappar med respektive lyssnare som kallar på knapparnas funktioner.....
+let newsButtonAll = function(){
+    let nButton = document.createElement("button");
+    nButton.innerText = "Mer Nyheter";
+    let sec = document.querySelector("article");
+    sec.appendChild(nButton);
+    nButton.addEventListener('click', newsButtonClick);
+}
+let newsButtonOne = function(){
+    let nButtonOne = document.createElement("button");
+    nButtonOne.innerText = "Mindre Nyheter";
+    let sec = document.querySelector("article");
+    sec.appendChild(nButtonOne);
+    nButtonOne.addEventListener('click', newsButtonOneClick);
+}
+
+// Funktion som tar fram bara den senaste nyheten....
+let latestNews = function (){
+    fetch(newsApi) 
+    .then(res => res.json())
+    .then(data => {
+        console.log("posts", data);
+        let latest = data.length-1;
+        //console.log(data[latest].content);
+        let newsPost = data[latest].content.rendered;
+        //console.log(newsPost);
+        let newsArticle = document.createElement("p");
+        newsArticle.innerHTML= newsPost;
+        let sec = document.querySelector("article");
+        sec.appendChild(newsArticle);
+        newsButtonAll();
+        
+    })
+}
+// Funktioner som ger nyhetsknapparna deras funktioner...
+latestNews();
+let newsButtonClick = function(){
+    let sec = document.querySelector("article");
+    sec.innerHTML = "";
+    allNews();
+};
+let newsButtonOneClick= function(){
+    let sec = document.querySelector("article");
+    sec.innerHTML = "";
+    latestNews();
+};
+
+//Lägger upp alla nyheter från flödet...
+let allNews = function () {
+    fetch(newsApi) 
+    .then(res => res.json())
+    .then(data => {
+        console.log("posts", data);
+        //console.log("posts", data[0].excerpt);
+        //printPages(data);
+        let i = 0;
+    do {
+        let newsPost = data[i].content.rendered;
+        //console.log(newsPost);
+        let newsArticle = document.createElement("p");
+        newsArticle.innerHTML = newsPost;
+        let sec = document.querySelector("article");
+        sec.appendChild(newsArticle);
+        i++;
+    } while (i < data.length);
+    })
+    //Lägger till en knapp som tar tillbaka bara den senaste nyheten
+    newsButtonOne();
+    };
+
+    //allNews();
+
+
 
 function StartLägtillText(text){
     header.append(p)
@@ -130,15 +202,66 @@ function printCart() {
 }
 
 
-
-
-
 fetch("http://46.101.108.242/wp-json/wc/v3/products/")
 .then(res => res.json())
 .then(data => {
     console.log(data)
 });
 
+function postOrder() {
+    console.log("Skicka order");
 
+    let order = {
+        payment_method: "bacs", 
+        payment_method_title: "Direct Bank Transfer",
+        set_paid: true,
+        customer_id: 1,
+        billing: {
+            first_name: "Elias",
+            last_name: "Linderos",
+            adress_1: "Bögat 69",
+            city: "Köping",
+            postcode: "420 69",
+            country: "SE",
+            email: "bakagodakakor@live.se",
+            phone: "070123456"
+        },
+        shipping: {
+            first_name: "Elias",
+            last_name: "Linderos",
+            adress_1: "Bögat 69",
+            city: "Köping",
+            postcode: "420 69",
+            country: "SE",
+            email: "bakagodakakor@live.se",
+            phone: "070123456"
+        },
+        line_items: 
+        cart1
+        ,
+        shipping_lines: [
+            {
+                method_id: "flat_rate",
+                method_title: "Flat rate",
+                total: "100"
+            }    
+        ]
+    
+    }
+    fetch("http://46.101.108.242/wp-json/wc/v3/orders", {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify(order),
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Order skickad", data)
+    //.then(emptyCart)
+    })
+    .catch(err => console.log("err", err));
+
+};
 
 

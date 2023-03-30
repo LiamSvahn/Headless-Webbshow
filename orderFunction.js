@@ -1,5 +1,4 @@
-import './script.js';
-//import emptyCart from './script.js'
+
 fetch("http://46.101.108.242/wp-json/wc/v3/products/")
 .then(res => res.json())
 .then(data => {
@@ -58,7 +57,7 @@ export default function postOrder() {
     .then(res => res.json())
     .then(data => {
         console.log("Order skickad", data)
-        //emptyCart();
+    .then(emptyCart)
     })
     .catch(err => console.log("err", err));
 

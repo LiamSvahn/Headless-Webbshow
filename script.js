@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> e5e0183 (ändrad)
 //import './news.js';
 //import './price.js';
 
@@ -310,16 +307,6 @@ function postOrder() {
 
 };
 
-<<<<<<< HEAD
-let buttonchild = document.querySelectorAll('button')[0]
-buttonchild.addEventListener("click", (event) =>{
-    if(div.style.display = "block"){
-        div.style.display = "none";
-    }else{
-        div.style.display = "block";
-    }
-})
-=======
 
 
 let button = document.createElement("button");
@@ -350,4 +337,3 @@ function getItem(items) {
 function removeBlock(){
   
 }
->>>>>>> e5e0183 (ändrad)

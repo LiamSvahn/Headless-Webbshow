@@ -1,17 +1,37 @@
 body{
     padding-bottom: 100px;
     margin: auto 0;
+    font-family: "Lucida Bright", Georgia, serif;
 }
+
+h1, h2, h3 {
+    font-family: "Lucida Bright", Georgia, serif;
+  }
+  
 
 nav{
     background-color: #333;
     height: 30px;
-    display: flex;
+    display: none;
 }
 
 header{
     background-color: rgb(210, 210, 210);
     height: 100px;
+    margin-top: 70px;
+    background-color: #BDCDD6;
+    text-align: center;
+    padding: 20px;
+    font-size: 26px;
+
+}
+
+input{
+    width: 50px;
+    padding: 0px;
+    text-align: center;
+    margin: -20px 10px 0px 10px;
+    height: 30px;
 
 }
 
@@ -22,17 +42,21 @@ footer{
     left: 0;
     right: 0;
     height: 100px;
+    display: none;
 }
 
 article{
-    background-color: rgb(204, 204, 216);
-    width: 500px;
+    background-color: #BDCDD6;
+    width: 800px;
     margin: auto;
     margin-top: 50px;
+    padding: 40px;
+
+
 }
 
 section{
-    background-color: rgb(204, 204, 216);
+    background-color:#EEE9DA;
     width: 900px;
     margin: auto;
     margin-top: 50px;
@@ -44,22 +68,39 @@ section{
 
 }
 section>div{
-    height: 450px;
+    height: 600px;
     width: 350px;
-    background-color: #333;
+    background-color: #93BFCF;
     margin: 40px;
     display: grid;
+    border-radius: 13px;
     
 }
 section>div>img{
-    width: 350px;
+    width: 310px;
     height: 200px;
+    margin:auto;
+    margin-top: 20px;
 }
 section>div>h2{
-    margin: 20px 10px 20px 10px;
+    margin: 0px 20px 0px 20px;
+
 }
 section>div>p{
-    margin: 0px 10px 0px 10px;
+    margin: -20px 20px -10px 20px;
     width: fit-content;
+
 }
 
+#cart {
+    background-color:#EEE9DA;
+    padding: 20px;
+}
+
+section>div>button{
+    height: 50px;
+    width: 60%;
+    margin: auto;
+    border-radius: 50px;
+    background-color: #6096B4;
+}

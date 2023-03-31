@@ -23,15 +23,14 @@ fetch("http://46.101.108.242/wp-json/wp/v2/pages/")
 const newsApi = "http://46.101.108.242/wp-json/wp/v2/posts";
 // Skapar två knappar med respektive lyssnare som kallar på knapparnas funktioner.....
 let newsButtonAll = function(){
-    let nButton = document.createElement("button");
-    nButton.setAttribute("id", "nyheterKnapp")
+    let nButton = document.createElement("button", "class", "knapp");
     nButton.innerText = "Mer Nyheter";
     let sec = document.querySelector("article");
     sec.appendChild(nButton);
     nButton.addEventListener('click', newsButtonClick);
 }
 let newsButtonOne = function(){
-    let nButtonOne = document.createElement("button");
+    let nButtonOne = document.createElement("button", "class", "knapp");
     nButtonOne.innerText = "Mindre Nyheter";
     let sec = document.querySelector("article");
     sec.appendChild(nButtonOne);
@@ -56,57 +55,18 @@ let latestNews = function (){
         
     })
 }
-let newsButtonClick = function() {
-    let sec = document.querySelector("section");
-    
-    // Get all the content inside the article tag
-    const allContent = sec.innerHTML;
-  
-    // Get the "mer nyheter" and "mindre nyheter" buttons
-    const moreBtn = document.querySelector("#moreBtn");
-    const lessBtn = document.querySelector("#lessBtn");
-  
-    // Check if the content is already hidden or not
-    if (sec.classList.contains("hidden")) {
-      // If content is already hidden, show it
-      sec.innerHTML = allContent;
-      sec.classList.remove("hidden");
-      moreBtn.style.display = "none";
-      lessBtn.style.display = "block";
-    } else {
-      // If content is not hidden, hide it
-      sec.innerHTML = allContent.substring(0, 200); // Show only first 200 characters
-      sec.classList.add("hidden");
-      moreBtn.style.display = "block";
-      lessBtn.style.display = "none";
-    }
-  };
-  
-  //// Add click event listeners to the "mer nyheter" and "mindre nyheter" buttons
-  //const moreBtn = document.querySelector("#moreBtn");
-  //moreBtn.addEventListener("click", newsButtonClick);
-  //
-  //const lessBtn = document.querySelector("#lessBtn");
-  //lessBtn.addEventListener("click", newsButtonClick);
-  //
-  //// Hide the "mindre nyheter" button initially
-  //lessBtn.style.display = "none";
-  
-
-// Add click event listeners to the "mer nyheter" and "mindre nyheter" buttons
-// const moreBtn = document.querySelector("#moreBtn");
-//moreBtn.addEventListener("click", newsButtonClick);
-
-//const lessBtn = document.querySelector("#lessBtn");
-//lessBtn.addEventListener("click", newsButtonClick);
-
-// Hide the "mindre nyheter" button initially
-//lessBtn.style.display = "none";
-
-//let newsButtonOneClick= function(){
-  //  let sec = document.querySelector("article");
-    //sec.innerHTML = "";
-    //latestNews();
+// Funktioner som ger nyhetsknapparna deras funktioner...
+latestNews();
+let newsButtonClick = function(){
+    let sec = document.querySelector("article");
+    sec.innerHTML = "";
+    allNews();
+};
+let newsButtonOneClick= function(){
+    let sec = document.querySelector("article");
+    sec.innerHTML = "";
+    latestNews();
+};
 
 //Lägger upp alla nyheter från flödet...
 let allNews = function () {
@@ -132,6 +92,7 @@ let allNews = function () {
     };
 
     //allNews();
+
 
 
 
@@ -240,7 +201,7 @@ function printCart() {
 
     } else {
         console.log("Tom kundvagn");
-        cart.innerText = "Inga produkter"
+        cart.innerText = "Kundvagn"
     }
 }
 
@@ -313,8 +274,7 @@ let button = document.createElement("button");
 button.classList.add("btn");
 
 document.body.append(nav, header, footer, article, div);
-button.innerText = "add to cart";
-div.append(button);
+
 
 fetch("http://46.101.108.242/wp-json/wc/v3/products")
   .then((res) => res.json())
